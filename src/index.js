@@ -20,6 +20,8 @@ const API_KEY = 'AIzaSyB_2moz3XaEwAkG1a-iz8CPX8eVVm9MgL4';
 // Fat arrow (check for reason)
 // => means 'function' (different syntax for Es6) 
 //'this' keyword changes too.
+
+// Base component.
 const App = () => {
     return (
         <div>
