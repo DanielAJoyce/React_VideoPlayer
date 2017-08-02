@@ -9,8 +9,9 @@ const VideoList = (props) => {
 
   // Iterates through each of the videos in props
   // Returns VideoListItems
+  //etag is unique to each video.
   const videoItems = props.videos.map((video) =>{
-    return <VideoListItem video={video}/>
+    return <VideoListItem key={video.etag} video={video}/>
   });
 
   //Will render each of items in videoItems array.
