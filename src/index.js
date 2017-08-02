@@ -2,16 +2,19 @@
 // Component should produce HTML
 
 // How to import module: import Library from 'node module name';
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-//Import Searchbar from search_bar in components.
 // No need to include file extension if it's a js file.
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
+
+import VideoList from './components/video_list';
 import SearchBar from './components/search_bar'; 
 
 
 //Youtube Data v3 API Key
 const API_KEY = 'AIzaSyB_2moz3XaEwAkG1a-iz8CPX8eVVm9MgL4';
+
+// YT Search requires object(key, term), return data.
 
 
 //const -> constant. Cannot change value.
@@ -21,13 +24,30 @@ const API_KEY = 'AIzaSyB_2moz3XaEwAkG1a-iz8CPX8eVVm9MgL4';
 // => means 'function' (different syntax for Es6) 
 //'this' keyword changes too.
 
-// Base component.
-const App = () => {
-    return (
-        <div>
-            <SearchBar/>
-        </div>
-    );
+//Class Base component so that we can have a state.
+class App extends Component {
+
+    constructor(props){
+      super(props);
+			this.state={ videos:[] };
+
+			YTSearch({key:API_KEY, term:'surfboards'}, (videos) => {
+				console.log(videos); 
+				//When key and value have same name. Can just put down the variable
+				//name and that will apply. Same as videos:videos
+				this.setState({videos});
+			});
+			
+
+    }
+    render(){
+        return (
+                <div>
+                    <SearchBar/>
+										<VideoList videos={this.state.videos}/>
+                </div>
+            );
+    };
 }
 
 
