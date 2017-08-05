@@ -20,14 +20,22 @@ class SearchBar extends Component {
     //When a change happens. It will re-renders the component which gives us real-time updates.
     //input value = {this.state.term} will bind the value to the target value
     return(
-      <div>
+      <div className="search-bar">
         
         <input value={this.state.term} 
-         onChange={event=>this.setState({term:event.target.value})}/>
+        //Calls onInput change and sets the event value to event.target.value
+         onChange={event=>this.onInputChange(event.target.value)}/>
         <br/>
         Value of the input: {this.state.term} 
       </div>
     );
+
+
+  }
+
+  onInputChange(term){
+    this.setState({term});
+    this.props.onSearchTermChange(term);
   }
 
 }
